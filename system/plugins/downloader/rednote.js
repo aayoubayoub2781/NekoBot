@@ -4,9 +4,9 @@ class Command {
         this.alias = ["xiaohongshu"];
         this.category = ["downloader"];
         this.settings = {
-            limit: true
+            limit: false
         };
-        this.description = "🟥 Download video/slide photo dari rednote";
+        this.description = "🟥 Download videos/slides from Rednote";
         this.loading = true;
     }
     run = async (m, {
@@ -17,17 +17,23 @@ class Command {
         store,
         text
     }) => {
-        if (!text || !Func.isUrl(text) || !/xhslink.com|xiaohongshu.com/.test(text)) throw "*❌ Masukan Input :* Masukan Url dari Xiaohongshu/Rednote"
+        if (!text || !Func.isUrl(text) || !/xhslink.com|xiaohongshu.com/.test(text)) 
+            throw "*❌ Input Error:* Please enter a valid Xiaohongshu/Rednote URL";
 
         let data = await Scraper.rednote(text);
-        if (!data.metadata) throw "*⁉️⁉️ Media tidak ditemukan*"
-        let caption = "*Xiaohongshu - Downloader 📩*\n"
-        caption += `*🔻 Title :* ${data.metadata.title}\n`
-        caption += `\n*📈 Statistik :*\n`
-        caption += Object.entries(data.metadata.stats).map(([a, b]) => `- ${a.capitalize()} : ${b}`).join("\n")
-        caption += `\n\n*👤 Info Pemilik :*\n`
-        caption += Object.entries(data.metadata.author).map(([a, b]) => `- ${a.capitalize()} : ${b}`).join("\n")
-        caption += "\n\n*✅ Media Berhasil Diunduh !*\n📨 Nikmati kemudahan mendownload video rednote hanya di NekoBot"
+        if (!data.metadata) throw "*⁉️⁉️ Media not found*";
+
+        let caption = "*Xiaohongshu - Downloader 📩*\n";
+        caption += `*🔻 Title :* ${data.metadata.title}\n`;
+        caption += `\n*📈 Statistics :*\n`;
+        caption += Object.entries(data.metadata.stats)
+            .map(([a, b]) => `- ${a.capitalize()} : ${b}`)
+            .join("\n");
+        caption += `\n\n*👤 Owner Info :*\n`;
+        caption += Object.entries(data.metadata.author)
+            .map(([a, b]) => `- ${a.capitalize()} : ${b}`)
+            .join("\n");
+        caption += "\n\n*✅ Media successfully downloaded!*\n📨 Enjoy easy Rednote video downloads only with NekoBot.";
 
         if (typeof data.download == "object") {
             for (let img of data.download) {

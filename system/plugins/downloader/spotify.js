@@ -7,16 +7,16 @@ module.exports = {
   settings: {
     limit: true,
   },
-  description: "🎵 Mencari atau mengunduh musik dari Spotify!",
+  description: "🎵 Download videos from Spotify!",
   loading: true,
   async run(m, { sock, Func, Scraper, text }) {
     if (!text)
       throw (
-        `*– 乂 Cara Penggunaan 🎶*\n\n` +
-        `> *🔍 Masukkan kata kunci* untuk mencari musik\n` +
-        `> *🔗 Masukkan URL Spotify* untuk mengunduh musik\n\n` +
+        `*– 乂 Tutorial 🎶*\n\n` +
+        `> *🔍 Search for the song\n` +
+        `> *🔗 Download from the Url\n\n` +
         `*– 乂 Contoh Penggunaan 📋*\n` +
-        `> *${m.prefix + m.command} Imagine Dragons*\n` +
+        `> *${m.prefix + m.command} SPACE!*\n` +
         `> *${m.prefix + m.command} https://open.spotify.com/track/examplelink*`
       );
 
@@ -37,11 +37,11 @@ module.exports = {
       });
     } else {
       let data = await Scraper.spotify.search(text);
-      if (!data || data.length === 0) throw `> *❌ Musik tidak ditemukan!*`;
+      if (!data || data.length === 0) throw `> *❌ not found!*`;
 
       let cap =
-        `*– 乂 Spotify - Pencarian 🔎*\n\n` +
-        `> Ketik *${m.prefix + m.command} [URL]* untuk mengunduh musik pilihanmu 🎶\n\n`;
+        `*– 乂 Spotify - Downloader 🔎*\n\n` +
+        `> Ketik *${m.prefix + m.command} [URL] The url is not working 🎶\n\n`;
       cap += data
         .map((a) =>
           Object.entries(a)

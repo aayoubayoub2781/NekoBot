@@ -10,7 +10,7 @@ class Command {
         this.settings = {
             limit: true,
         };
-        this.description = "🎵 Cari dan download musik dari Apple Music!";
+        this.description = "🎵 Search and download music from Apple Music!";
         this.loading = true;
     }
     run = async (m, {
@@ -21,25 +21,25 @@ class Command {
         store,
         text
     }) => {
-        if (!text) throw "> ❌ *Masukkan pencarian atau link dari Apple Music*";
+        if (!text) throw "> ❌ *Enter a search query or Apple Music link*";
 
         if (Func.isUrl(text)) {
             if (!/music.apple.com/.test(text))
-                throw "> ❌ *Link yang dimasukkan bukan link Apple Music!*";
+                throw "> ❌ *The provided link is not an Apple Music link!*";
             let data = await Scraper.applemusic.download(text);
             if (!data.metadata) throw Func.jsonFormat(data);
             let anu = await toAudio(await Func.fetchBuffer(data.download), 'mp3');
             let cap = "*🎧 Apple Music Downloader 🎧*\n"
-            cap += `*✍️ Judul :* ${data.metadata.name}\n`
+            cap += `*✍️ Title :* ${data.metadata.name}\n`
             cap += `*📝 Genre :* ${data.metadata.genre}\n`
-            cap += `*👦 Artis :* ${data.metadata.artist.name}\n`
-            cap += `*🕑 Diunggah pada :* ${data.metadata.datePublished}`
+            cap += `*👦 Artist :* ${data.metadata.artist.name}\n`
+            cap += `*🕑 Released on :* ${data.metadata.datePublished}`
             sock.sendFile(m.cht, data.metadata.image, null, cap, m);
             sock.sendFile(
                 m.cht,
                 anu.data,
                 `${data.metadata.name} | ${data.metadata.artist.name}.mp3`,
-                `🎧 *Silakan download musik ini dengan menekan tombol di atas*\n\n> *Catatan*: Jika file muncul sebagai , silakan download manual.`,
+                `🎧 *Download this music by clicking the button above*\n\n> *Note*: If the file appears as , please download it manually.`,
                 m, {
                     mimetype: "audio/mpeg",
                     jpegThumbnail: await sock.resize(data.metadata.image, 400, 400),
@@ -47,12 +47,12 @@ class Command {
             );
         } else {
             let data = await Scraper.applemusic.search(text);
-            if (data.length === 0) throw "> ❌ *Musik tidak ditemukan*";
+            if (data.length === 0) throw "> ❌ *Music not found*";
 
-            let cap = `*– 乂 Apple Music - Hasil Pencarian*\n> 🎤 *Pilih lagu yang ingin kamu download!*\n\n`;
+            let cap = `*– 乂 Apple Music - Search Results*\n> 🎤 *Select a song to download!*\n\n`;
             for (let i of data) {
-                cap += `> 🎶 *Judul*: ${i.title}\n`;
-                cap += `> 👨‍🎤 *Artis*: ${i.artist.name}\n`;
+                cap += `> 🎶 *Title*: ${i.title}\n`;
+                cap += `> 👨‍🎤 *Artist*: ${i.artist.name}\n`;
                 cap += `> 🔗 *Link*: ${i.song}\n\n`;
             }
             m.reply(cap);

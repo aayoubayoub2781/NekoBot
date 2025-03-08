@@ -3,19 +3,19 @@ module.exports = {
   alias: ["mf", "mfdl"],
   category: ["downloader"],
   settings: {
-    limit: true,
+    limit: false,
   },
-  description: "Unduh file dari MediaFire 🔽",
+  description: "Download files from MediaFire 🔽",
   loading: true,
   async run(m, { sock, Scraper, Func, text }) {
     if (!Func.isUrl(text) || !/mediafire.com/.test(text) || !text)
-      throw "> *❌ Masukkan link MediaFire yang valid!*";
+      throw "> *❌ Enter a valid MediaFire link!*";
     let data = await Scraper.mediafire(text);
     let cap = "*– 乂 MediaFire - Downloader 🗂️*\n";
-    cap += `> *🔸 Nama File :* ${data.filename}\n`;
-    cap += `> *🔸 Tipe File :* ${data.mimetype}\n`;
-    cap += `> *🔸 Ukuran File :* ${Func.formatSize(data.size)}\n`;
-    cap += `> *🔸 Link Download :* ${data.download}\n`;
+    cap += `> *🔸 File Name :* ${data.filename}\n`;
+    cap += `> *🔸 File Type :* ${data.mimetype}\n`;
+    cap += `> *🔸 File Size :* ${Func.formatSize(data.size)}\n`;
+    cap += `> *🔸 Download Link :* ${data.download}\n`;
 
     let buffer = await fetch(data.download).then(async (a) =>
       Buffer.from(await a.arrayBuffer()),
@@ -24,7 +24,7 @@ module.exports = {
     let limit = Func.sizeLimit(data.size, db.list().settings.max_upload);
 
     if (limit.oversize)
-      throw `Maaf, ukuran file *( ${size} )* melebihi batas ukuran yang ditentukan. Upgrade status kamu ke premium untuk mendownload file hingga *1GB*!`;
+      throw `Sorry, the file size *( ${size} )* exceeds the allowed limit. Upgrade to premium to download files up to *1GB*!`;
 
     m.reply({
       document: buffer,

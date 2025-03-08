@@ -1,13 +1,13 @@
 const fs = require("node:fs");
 
 const config = {
-  owner: ["6282114275683", "6281910094713"],
-  name: "- NekoBot - Simple WhatsApp bot",
+  owner: ["212710723716"],
+  name: "- DracoBot - Simple WhatsApp bot",
   sessions: "sessions",
   prefix: [".", "?", "!"], // Tambahkan prefix sesuai kebutuhan
   sticker: {
-    packname: "✨ NekoPack ✨", 
-    author: "🐾 AxellNetwork 🐾", 
+    packname: "✨ DracoPack ✨", 
+    author: "🐾 XiT Draco 🐾", 
   },
   id: {
     newsletter: "120363388655497053@newsletter", 
@@ -15,14 +15,14 @@ const config = {
   },
   messages: {
     wait: "> ⏳ *Mohon tunggu sebentar*... Kami sedang memproses permintaan Anda, harap bersabar ya!", 
-    owner: "> 🧑‍💻 *Fitur ini hanya untuk pemilik bot*... Maaf, Anda tidak memiliki akses ke fitur ini.", 
-    premium: "> 🥇 *Upgrade ke Premium* untuk mendapatkan akses ke fitur eksklusif, murah dan cepat! Hubungi admin untuk info lebih lanjut.", 
-    group: "> 👥 *Fitur ini hanya tersedia di grup*... Pastikan Anda berada di grup WhatsApp untuk mengakses fitur ini.",
-    botAdmin: "> ⚠️ *Anda harus menjadi admin grup* untuk menggunakan fitur ini, karena bot memerlukan hak akses admin.", 
-    grootbotbup: "> 🛠️ *Jadikan NekoBot sebagai admin* grup untuk menggunakan fitur ini. Pastikan Anda memberikan hak admin kepada bot.", 
+    owner: "> 🧑‍💻 *This feature just for the owner.", 
+    premium: "> 🥇 *Upgrade To prumiem.", 
+    group: "> 👥 *This feature just for Groups.",
+    botAdmin: "> ⚠️ *The bot is not admin.", 
+    grootbotbup: "> 🛠️ *Admim.", 
   },
   database: "neko-db",
-  tz: "Asia/Jakarta",
+  tz: "Africa/Casablanca",
 };
 
 module.exports = config;

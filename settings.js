@@ -14,7 +14,7 @@ const config = {
     group: "120363370515588374@g.us" 
   },
   messages: {
-    wait: "> ⏳ *Mohon tunggu sebentar*... Kami sedang memproses permintaan Anda, harap bersabar ya!", 
+    wait: "> ⏳ *Mohon tunggu sebentar*... please wait a while!", 
     owner: "> 🧑‍💻 *This feature just for the owner.", 
     premium: "> 🥇 *Upgrade To prumiem.", 
     group: "> 👥 *This feature just for Groups.",

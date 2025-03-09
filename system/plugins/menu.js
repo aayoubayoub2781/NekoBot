@@ -8,7 +8,7 @@ module.exports = {
   command: "menu",
   alias: ["menu", "help"],
   category: ["main"],
-  description: "Menampilkan menu bot",
+  description: "Bot main menu",
   loading: true,
   async run(m, { sock, plugins, config, Func, text }) {
     let data = fs.readFileSync(process.cwd() + "/system/case.js", "utf8");
@@ -38,7 +38,7 @@ module.exports = {
     let alias = 0;
     let pp = await sock
       .profilePictureUrl(m.sender, "image")
-      .catch((e) => "https://files.catbox.moe/8getyg.jpg");
+      .catch((e) => "https://files.catbox.moe/37022o.jpg");
     Object.values(menu).forEach((category) => {
       cmd += category.command.length;
       category.command.forEach((command) => {
@@ -48,42 +48,41 @@ module.exports = {
     let premium = db.list().user[m.sender].premium.status;
     let limit = db.list().user[m.sender].limit;
 
-    const header = `☘️ *N E K O – B O T*
-👋 Hai nama saya NekoBot saya adalah asisten bot WhatsApp 
-yang akan membantu anda dengan fitur yang sediakan !
+    const header = `🤟 *D R A C O – AI*
+👋 Hay~ its me Draco your favroite frendily AI !
 ─────────────────────────
         `;
 
     const footer = `
 📢 *Jika Anda menemui masalah*
 *hubungi developer bot.*
-💻 *Script bot:* https://github.com/AxellNetwork/NekoBot
-🤖 *Didukung oleh WhatsApp*
+💻 *Owner:* XiT Draco
+🤖 *The Script Is closed Source*
 🌐 *Saluran WhatsApp NekoBot :*
 https://whatsapp.com/channel/0029Vb0YWvYJ3jusF2nk9U1P
 
-> 💬 *Fitur Limit*: 🥈
-> 💎 *Fitur Premium*: 🥇
+> 💬 *Feature Limit*: 🥈
+> 💎 *Feature Premium*: 🥇
 ─────────────────────────
 `;
 
     if (text === "all") {
       let caption = `${header} 
 🎮🎮 *Info Pengguna*:
-> - 🧑‍💻 Nama: ${m.pushName}
+> - 🧑‍💻 Name: ${m.pushName}
 > - 🏷️ Tag: @${m.sender.split("@")[0]}
 > - 🎖️ Status: ${m.isOwner ? "Developer" : premium ? "Premium" : "Gratis"}
-> - ⚖️ Limit: ${m.isOwner ? "Tidak terbatas" : limit}
+> - ⚖️ Limit: ${m.isOwner ? "Updown" : limit}
 
 🤖 *Info Bot*:
-> - 🏷️ Nama: ${pkg.name}
-> - 🔢 Versi: v${pkg.version}
-> - 🕰️ Waktu Aktif: ${Func.toDate(process.uptime() * 1000)}
+> - 🏷️ Name: ${pkg.name}
+> - 🔢 Version: v${pkg.version}
+> - 🕰️ Uptime: ${Func.toDate(process.uptime() * 1000)}
 > - 🔑 Prefix: [ ${m.prefix} ]
-> - ⚡ Total perintah: ${cmd + alias + matches.length}
+> - ⚡ Total Cmd: ${cmd + alias + matches.length}
 
   
-🛠️ *msnu – OTHER* 
+🛠️ *menu – OTHER* 
 ${matches.map((a, i) => `> *(${i + 1})* ${m.prefix + a}`).join("\n")}
 ─────────────────────────
 `;
@@ -102,11 +101,11 @@ ${commands.command.map((command, index) => `> *(${index + 1})* ${m.prefix + comm
         contextInfo: {
           mentionedJid: sock.parseMention(caption),
           externalAdReply: {
-            title: "© NekoBot | Playground",
+            title: "© Draco | simple",
             body: "👨‍💻 Bot WhatsApp - Simple",
             mediaType: 1,
             sourceUrl: "https://whatsapp.com/channel/0029Vb0YWvYJ3jusF2nk9U1P",
-            thumbnailUrl: "https://files.catbox.moe/yupd7z.jpg",
+            thumbnailUrl: "https://files.catbox.moe/37022o.jpg",
             renderLargerThumbnail: true,
           },
         },
@@ -114,18 +113,18 @@ ${commands.command.map((command, index) => `> *(${index + 1})* ${m.prefix + comm
     } else if (Object.keys(menu).find((a) => a === text.toLowerCase())) {
       let list = menu[Object.keys(menu).find((a) => a === text.toLowerCase())];
       let caption = `${header}
-🎮 *Info Pengguna*:
+🎮 *Info*:
 > - 🧑‍💻 Nama: ${m.pushName}
 > - 🏷️ Tag: @${m.sender.split("@")[0]}
-> - 🎖️ Status: ${m.isOwner ? "Developer" : premium ? "Premium" : "Gratis"}
-> - ⚖️ Limit: ${m.isOwner ? "Tidak terbatas" : limit}
+> - 🎖️ Status: ${m.isOwner ? "Developer" : premium ? "Premium" : "Free2use"}
+> - ⚖️ Limit: ${m.isOwner ? "Updown" : limit}
 
 🤖 *Info Bot*:
 > - 🏷️ Nama: ${pkg.name}
-> - 🔢 Versi: v${pkg.version}
-> - 🕰️ Waktu Aktif: ${Func.toDate(process.uptime() * 1000)}
+> - 🔢 Version: v${pkg.version}
+> - 🕰️ Uptime: ${Func.toDate(process.uptime() * 1000)}
 > - 🔑 Prefix: [ ${m.prefix} ]
-> - ⚡ Total perintah: ${cmd + alias + matches.length}
+> - ⚡ Total cmd: ${cmd + alias + matches.length}
 
 ─────────────────────────
 🛠️ *Menu – ${text.toUpperCase()}*
@@ -145,11 +144,11 @@ ${list.command
         contextInfo: {
           mentionedJid: sock.parseMention(caption),
           externalAdReply: {
-            title: "© NekoBot | Playground",
+            title: "© Draco| Playground",
             body: "👨‍💻 Bot WhatsApp - Simple",
             mediaType: 1,
-            sourceUrl: "https://whatsapp.com/channel/0029Vb0YWvYJ3jusF2nk9U1P",
-            thumbnailUrl: "https://files.catbox.moe/yupd7z.jpg",
+            sourceUrl: "https://whatsapp.com/channel/0029VaGiagl1CYoIwP8Vri0g",
+            thumbnailUrl: "https://files.catbox.moe/37022o.jpg",
             renderLargerThumbnail: true,
           },
         },
@@ -157,18 +156,18 @@ ${list.command
     } else {
       let list = Object.keys(menu);
       let caption = `${header}
-🎮 *Info Pengguna*:
-> - 🧑‍💻 Nama: ${m.pushName}
+🎮 *Info*:
+> - 🧑‍💻 Name: ${m.pushName}
 > - 🏷️ Tag: @${m.sender.split("@")[0]}
-> - 🎖️ Status: ${m.isOwner ? "Developer" : premium ? "Premium" : "Gratis"}
-> - ⚖️ Limit: ${m.isOwner ? "Tidak terbatas" : limit}
+> - 🎖️ Status: ${m.isOwner ? "Developer" : premium ? "Premium" : "free"}
+> - ⚖️ Limit: ${m.isOwner ? "updown" : limit}
 
 🤖 *Info Bot*:
-> - 🏷️ Nama: ${pkg.name}
-> - 🔢 Versi: v${pkg.version}
-> - 🕰️ Waktu Aktif: ${Func.toDate(process.uptime() * 1000)}
+> - 🏷️ Name: ${pkg.name}
+> - 🔢 Version: v${pkg.version}
+> - 🕰️ Uptime: ${Func.toDate(process.uptime() * 1000)}
 > - 🔑 Prefix: [ ${m.prefix} ]
-> - ⚡ Total perintah: ${cmd + alias + matches.length}
+> - ⚡ Total Cmd: ${cmd + alias + matches.length}
 
 ─────────────────────────
 🗂️ *Daftar Menu*:
@@ -185,11 +184,11 @@ ${list.map((a) => `> *(${a})* ${m.prefix}menu ${a}`).join("\n")}
         contextInfo: {
           mentionedJid: sock.parseMention(caption),
           externalAdReply: {
-            title: "© NekoBot | Playground",
+            title: "© Draco | Playground",
             body: "👨‍💻 Bot WhatsApp - Simple",
             mediaType: 1,
-            sourceUrl: "https://whatsapp.com/channel/0029Vb0YWvYJ3jusF2nk9U1P",
-            thumbnailUrl: "https://files.catbox.moe/yupd7z.jpg",
+            sourceUrl: "https://whatsapp.com/channel/0029VaGiagl1CYoIwP8Vri0g",
+            thumbnailUrl: "https://files.catbox.moe/37022o.jpg",
             renderLargerThumbnail: true,
           },
         },
